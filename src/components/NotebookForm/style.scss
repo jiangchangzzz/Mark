@@ -1,0 +1,54 @@
+.note-form{
+    margin: 10px 0;
+    padding: 0 18px;
+
+    .form-group{
+        margin-bottom: 10px;
+
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+
+    .form-input{
+        width: 100%;
+        padding: 8px 8px;
+        background-color: rgba(180,180,180,0.2);
+        color: #fff;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-submit{
+        padding: 8px 16px;
+        background-color: transparent;
+        color: #34ab20;
+        border: 1px solid #34ab20;
+        border-radius: 24px;
+        outline: none;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+
+    .form-cancel{
+        padding: 8px 16px;
+        background-color: transparent;
+        color: #999;
+        border: none;
+        outline: none;
+        cursor: pointer;
+
+        &:hover{
+            color: #fff;
+        }
+    }
+
+    .form-info{
+        color: #fff;
+    }
+}

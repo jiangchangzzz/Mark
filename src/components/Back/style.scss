@@ -1,0 +1,17 @@
+.back{
+    padding: 0 18px;
+
+    .back-link{
+        display: block;
+        padding: 9px 0;
+        color: #2fa0ef;
+        font-size: 15px;
+        text-align: center;
+        border: 1px solid #2fa0ef;
+        border-radius: 4px;
+
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+}
