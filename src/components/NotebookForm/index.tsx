@@ -21,6 +21,10 @@ class NotebookForm extends React.Component<NotebookFormProps,NotebookFormState> 
         };
     }
 
+    componentDidMount(){
+        (this.refs.nameInput as HTMLInputElement).focus();
+    }
+
     changeName=(e: React.ChangeEvent<HTMLInputElement>)=>{
         this.setState({
             name: e.target.value

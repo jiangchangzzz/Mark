@@ -1,0 +1,14 @@
+.new-topic{
+    .create-topic{
+        padding: 20px 0 20px 25px;
+        cursor: pointer;
+        
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+
+    .icon{
+        margin-right: 4px;
+    }
+}

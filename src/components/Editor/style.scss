@@ -1,0 +1,32 @@
+.editor{
+    height: 100%;
+
+    &-title{
+        input{
+            width: 100%;
+            padding: 20px 30px;
+            font-size: 30px;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+    }
+
+    &-tool{
+        height: 40px;
+        background-color: #DEDEDE;
+    }
+
+    &-content{
+        height: 80%;
+
+        textarea{
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+    }
+}

@@ -3,4 +3,11 @@
     width: 25%;
     overflow-y: auto;
     box-sizing: border-box;
+    border-left: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+
+    &-info{
+        text-align: center;
+        color: #999;
+    }
 }

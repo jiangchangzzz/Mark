@@ -1,0 +1,104 @@
+.topic-item{
+    position: relative;
+    border-top: 1px solid #dcdcdc;
+    border-left: 5px solid transparent;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #ececec;
+    }
+
+    &.active{
+        background-color: #ececec;
+        border-left-color: #2fa0ef;
+    }    
+
+    .item-icon{
+        float: left;
+        width: 60px;
+        height: 82px;
+        line-height: 82px;
+        text-align: center;
+        font-size: 30px;
+        color: #CDBD8A;
+    }
+
+    .item-setting{
+        position: absolute;
+        right: 0;
+        top: 50%;
+        height: 30px;
+        width: 30px;
+        margin-top: -15px;
+        text-align: center;
+
+        .setting-icon{
+            line-height: 30px;
+            color: #a0a0a0;
+        }
+
+        .setting-select{
+            position: absolute;
+            top: 100%;
+            right: 2px;
+            padding: 4px 0;
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            border: 1px solid #dcdcdc;
+            border-radius: 4px;
+            z-index: 100;
+
+            li{
+                min-width: 80px;
+                padding: 10px 20px;
+                border-bottom: 1px solid #e5e5e5;
+                cursor: pointer;
+
+                &:last-child{
+                    border-bottom: none;
+                }
+
+                &:hover{
+                    background-color: #3F3F3F;
+                    color: #fff;
+                }
+
+                .icon{
+                    margin-right: 4px;
+                }
+            } 
+
+            &:before{
+                display: block;
+                position: absolute;
+                right: 7px;
+                top: -8px;
+                width: 0;
+                height: 0;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-bottom: 8px solid #fff;
+                content: '';
+            }
+        }
+    }
+
+    .item-text{
+        padding: 15px 30px 15px 60px;
+
+        h3{
+            font-size: 18px;
+            font-weight: normal;
+            line-height: 2;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+        }
+
+        p{
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+        }
+    }   
+}

@@ -1,12 +1,15 @@
 import * as React from 'react';
-import NotebookForm from '../NotebookForm';
+import { withRouter,NavLink } from 'react-router-dom';
+import NotebookForm from '../../NotebookForm';
 import './style.scss';
 
 interface NotebookItemProps {
     name: string;
-    isActive: boolean;
     putNotebook: any,
-    key: string;
+    deleteNotebook: any,
+    _id: string,
+    history: any,
+    match: any
 }
 
 interface NotebookItemState {
@@ -36,26 +39,33 @@ class NotebookItem extends React.Component<NotebookItemProps, NotebookItemState>
         });
     }
 
-    submitForm=(name: string)=>{
-        this.props.putNotebook(this.props.key,name)
+    putNotebook=(name: string)=>{
+        this.props.putNotebook(this.props._id,name);
+        this.showForm(false);
+    }
+
+    deleteNotebook=()=>{
+        this.props.deleteNotebook(this.props._id);
+        this.toggleSelect();
     }
 
     render() {
-        const { name, isActive } = this.props;
+        const { name,_id,match } = this.props;
         const { isShowSelect,isShowForm } = this.state;
+        const currentid=match.params.notebookid;
         return (
-            <li className={'note-item ' + (isActive ? 'active' : '')}>
-                <p className="item-name">{name}</p>
+            <li className={'note-item ' + ( _id===currentid? 'active' : '')}>
+                <NavLink to={`/notebook/${_id}`}><p className="item-name">{name}</p></NavLink>
                 <div className="item-setting" onClick={this.toggleSelect}><i className="icon-cog"></i></div>
                 {isShowSelect &&
                     <ul className="item-select">
-                        <li onClick={()=>this.showForm(true)}><i className="icon-edit"></i>修改文集名</li>
-                        <li><i className="icon-trash"></i>删除文集</li>
+                        <li onClick={()=>this.showForm(true)}><i className="icon icon-edit"></i>修改文集名</li>
+                        <li onClick={this.deleteNotebook}><i className="icon icon-trash"></i>删除文集</li>
                     </ul>}
-                {isShowForm && <NotebookForm prevName={name} onSubmit={this.submitForm} onCancel={()=>this.showForm(false)}/>}
+                {isShowForm && <NotebookForm prevName={name} onSubmit={this.putNotebook} onCancel={()=>this.showForm(false)}/>}
             </li>
         )
     }
 }
 
-export default NotebookItem;
+export default withRouter<any>(NotebookItem);

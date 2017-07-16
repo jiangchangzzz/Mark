@@ -1,7 +1,10 @@
 import { Notebook } from './Notebook';
+import { Topic } from './Topic';
 
 export interface StoreState{
     notebook: DataStore<Notebook>;
+    topic: DataStore<Topic>;
+    editor: Topic
 }
 
 export class DataStore<T=any>{
