@@ -7,11 +7,11 @@ import './style.scss';
 import Back from '../../../components/Back';
 import NewNotebook from '../../../components/NewNotebook';
 import NotebookList from '../../../components/NotebookList';
-import { StoreState, DataStore, Notebook as NotebookType } from '../../../types';
+import { NotebookStore, MarkStore } from '../../../types';
 import * as notebookAction from '../../../actions/notebook';
 
 interface NotebookProps{
-    notebook: DataStore<NotebookType>
+    notebook: NotebookStore
     notebookAction: any
 }
 
@@ -42,13 +42,13 @@ class Notebook extends React.Component<NotebookProps,any> {
     }
 }
 
-const mapStateToProps=(state: StoreState)=>{
+const mapStateToProps=(state: MarkStore)=>{
     return {
         notebook: state.notebook
     };
 };
 
-const mapDispatchToProps=(dispatch: Dispatch<StoreState>)=>{
+const mapDispatchToProps=(dispatch: Dispatch<MarkStore>)=>{
     return {
         notebookAction: bindActionCreators<any>(notebookAction,dispatch)
     }

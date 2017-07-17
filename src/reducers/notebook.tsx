@@ -1,7 +1,11 @@
-import { DataStore, Notebook } from '../types';
+import { NotebookStore } from '../types';
 import { NotebookAction } from '../constants/actionType';
 
-const initialState=new DataStore<Notebook>();
+const initialState: NotebookStore={
+    isFetching: false,
+    data: [],
+    error: null
+};
 
 const notebook=(state=initialState,action)=>{
     switch(action.type){

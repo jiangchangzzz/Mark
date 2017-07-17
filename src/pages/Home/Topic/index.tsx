@@ -1,21 +1,20 @@
 import * as React from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import './style.scss';
 import NewTopic from '../../../components/NewTopic';
 import TopicList from '../../../components/TopicList';
-import { StoreState, DataStore, Topic as TopicType } from '../../../types';
+import { TopicStore, HomeRouterParam, MarkStore } from '../../../types';
 import * as topicAction from '../../../actions/topic';
 
 interface TopicProps{
-    topic: DataStore<TopicType>;
+    topic: TopicStore;
     topicAction: any;
-    match: any;
 }
 
-class Topic extends React.Component<TopicProps,any> {
+class Topic extends React.Component<TopicProps & RouteComponentProps<HomeRouterParam> ,any> {
     componentDidMount(){
         const {match}=this.props;
         let curId=match.params.notebookid;
@@ -26,32 +25,36 @@ class Topic extends React.Component<TopicProps,any> {
     }
 
     componentDidUpdate(prevProps,preState){
+        const { topic }=this.props;
+
         let preId=prevProps.match.params.notebookid;
         let curId=this.props.match.params.notebookid;
 
-        if(curId && curId!==preId){
+        if(curId && curId!==preId && !topic[curId]){
             this.props.topicAction.getTopics(curId);
+            console.log('red');
         }
     }
 
     renderTopicList=()=>{
+        const {notebookid}=this.props.match.params;
         const {topic}=this.props;
-        let notebookId=this.props.match.params.notebookid;
+        const currentTopic=topic[notebookid];
 
-        if(topic.isFetching){
-            return <p className="topic-info">加载中...</p>;
-        }
-        else if(topic.error){
-            return <p className="topic-info">{topic.error}</p>;
-        }
-        else if(!notebookId){
+        if(!notebookid){
             return <p className="topic-info">请选择一个文集</p>;
         }
-        else if(topic.data.length===0){
+        else if(!currentTopic || currentTopic.isFetching){
+            return <p className="topic-info">加载中...</p>;
+        }
+        else if(currentTopic.error){
+            return <p className="topic-info">{topic.error}</p>;
+        }
+        else if(currentTopic.data.length===0){
             return <p className="topic-info">当前文集内没有文章</p>;
         }
         else{
-            return <TopicList topics={topic.data}/>;
+            return <TopicList topics={currentTopic.data}/>;
         }
     }
 
@@ -65,13 +68,13 @@ class Topic extends React.Component<TopicProps,any> {
     }
 }
 
-const mapStateToProps=(state: StoreState)=>{
+const mapStateToProps=(state: MarkStore)=>{
     return {
         topic: state.topic
     };
 };
 
-const mapDispatchToProps=(dispatch: Dispatch<StoreState>)=>{
+const mapDispatchToProps=(dispatch: Dispatch<MarkStore>)=>{
     return {
         topicAction: bindActionCreators<any>(topicAction,dispatch)
     };

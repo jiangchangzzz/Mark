@@ -1,15 +1,13 @@
 import * as React from 'react';
-import { withRouter,NavLink } from 'react-router-dom';
-import NotebookForm from '../../NotebookForm';
+import { withRouter,NavLink, RouteComponentProps } from 'react-router-dom';
 import './style.scss';
+import NotebookForm from '../../NotebookForm';
+import { Notebook, HomeRouterParam } from '../../../types'
 
 interface NotebookItemProps {
-    name: string;
-    putNotebook: any,
-    deleteNotebook: any,
-    _id: string,
-    history: any,
-    match: any
+    notebook: Notebook;
+    putNotebook: any;
+    deleteNotebook: any;
 }
 
 interface NotebookItemState {
@@ -17,8 +15,8 @@ interface NotebookItemState {
     isShowForm: boolean;
 }
 
-class NotebookItem extends React.Component<NotebookItemProps, NotebookItemState>{
-    constructor(props: NotebookItemProps) {
+class NotebookItem extends React.Component<NotebookItemProps & RouteComponentProps<HomeRouterParam>, NotebookItemState>{
+    constructor(props) {
         super(props);
         this.state = {
             isShowSelect: false,
@@ -40,32 +38,34 @@ class NotebookItem extends React.Component<NotebookItemProps, NotebookItemState>
     }
 
     putNotebook=(name: string)=>{
-        this.props.putNotebook(this.props._id,name);
+        this.props.putNotebook(this.props.notebook._id,name);
         this.showForm(false);
     }
 
     deleteNotebook=()=>{
-        this.props.deleteNotebook(this.props._id);
+        this.props.deleteNotebook(this.props.notebook._id);
         this.toggleSelect();
     }
 
     render() {
-        const { name,_id,match } = this.props;
+        const { notebook,match } = this.props;
         const { isShowSelect,isShowForm } = this.state;
         const currentid=match.params.notebookid;
         return (
-            <li className={'note-item ' + ( _id===currentid? 'active' : '')}>
-                <NavLink to={`/notebook/${_id}`}><p className="item-name">{name}</p></NavLink>
-                <div className="item-setting" onClick={this.toggleSelect}><i className="icon-cog"></i></div>
-                {isShowSelect &&
-                    <ul className="item-select">
-                        <li onClick={()=>this.showForm(true)}><i className="icon icon-edit"></i>修改文集名</li>
-                        <li onClick={this.deleteNotebook}><i className="icon icon-trash"></i>删除文集</li>
-                    </ul>}
+            <li className={'note-item ' + ( notebook._id===currentid? 'active' : '')}>
+                <div className="item-content">
+                    <NavLink to={`/notebook/${notebook._id}`}><p className="item-name">{notebook.name}</p></NavLink>
+                    <div className="item-setting" onClick={this.toggleSelect}><i className="icon-cog"></i></div>
+                    {isShowSelect &&
+                        <ul className="item-select">
+                            <li onClick={()=>this.showForm(true)}><i className="icon icon-edit"></i>修改文集名</li>
+                            <li onClick={this.deleteNotebook}><i className="icon icon-trash"></i>删除文集</li>
+                        </ul>}
+                </div>
                 {isShowForm && <NotebookForm prevName={name} onSubmit={this.putNotebook} onCancel={()=>this.showForm(false)}/>}
             </li>
         )
     }
 }
 
-export default withRouter<any>(NotebookItem);
+export default withRouter<NotebookItemProps>(NotebookItem);

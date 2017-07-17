@@ -21,6 +21,7 @@ const fetchMiddleware=store=>next=>action=>{
         .then((json: IMResponse)=>{
             if(json.success){
                 next({
+                    ...action,
                     type: SUCCESS,
                     payload: json.data
                 });

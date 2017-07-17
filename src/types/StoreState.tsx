@@ -1,15 +1,13 @@
-import { Notebook } from './Notebook';
-import { Topic } from './Topic';
+import { NotebookStore } from './Notebook';
+import { TopicStore } from './Topic';
 
-export interface StoreState{
-    notebook: DataStore<Notebook>;
-    topic: DataStore<Topic>;
-    editor: Topic
-}
-
-export class DataStore<T=any>{
-    isFetching: boolean=false;
-    data: T[]=[];
-    error: string | null=null;
+/**
+ * 应用级Store
+ * @export
+ * @interface MarkStore
+ */
+export interface MarkStore{
+    notebook: NotebookStore;
+    topic: TopicStore;
 }
 

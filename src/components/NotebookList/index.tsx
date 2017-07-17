@@ -3,10 +3,10 @@ import * as React from 'react';
 
 import './style.scss';
 import NotebookItem from './Item';
-import { DataStore, Notebook } from '../../types'
+import { NotebookStore } from '../../types'
 
 interface NotebookListProps{
-    notebook: DataStore<Notebook>,
+    notebook: NotebookStore,
     putNotebook: any,
     deleteNotebook: any
 }
@@ -22,7 +22,7 @@ class NotebookList extends React.Component<NotebookListProps,any> {
             <div>
                 <ul className="note-list">
                     {notebook.data.map((item,index)=>(
-                        <NotebookItem key={item._id} {...item} isActive={true} putNotebook={putNotebook} deleteNotebook={deleteNotebook}/>
+                        <NotebookItem key={item._id} notebook={item} putNotebook={putNotebook} deleteNotebook={deleteNotebook}/>
                     ))}
                 </ul>
             </div>
