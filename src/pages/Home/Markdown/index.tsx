@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
+
 import './style.scss';
 import Editor from '../../../components/Editor';
 import { MarkStore, TopicStore, HomeParam } from '../../../types';
@@ -16,7 +17,6 @@ class Markdown extends React.Component<MarkdownProps & RouteComponentProps<HomeP
     renderEditor() {
         const { topic, match } = this.props;
         const { notebookid, topicid } = match.params;
-        console.log(notebookid,topicid)
         if (!topicid) {
             return <p className="markdown-info">请选择一篇文章</p>
         }
@@ -33,7 +33,7 @@ class Markdown extends React.Component<MarkdownProps & RouteComponentProps<HomeP
                 })
                 return <Editor topic={currentTopic} />
             }
-            else{
+            else {
                 return <p className="markdown-info">加载中...</p>;
             }
         }

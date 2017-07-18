@@ -1,15 +1,15 @@
 import { NotebookAction } from '../constants/actionType';
 
-const userId='594c86e5442a6c04280bcca7';
-const notebookUrl='notebook';
+const userId = '594c86e5442a6c04280bcca7';
+const notebookUrl = 'notebook';
 
 /**
  * 获取文集
  */
-export const getNotebook=()=>{
+export const getNotebook = () => {
     return {
         url: `${notebookUrl}?userid=${userId}`,
-        option: {method: 'GET'},
+        option: { method: 'GET' },
         types: [
             NotebookAction.GET_NOTEBOOK_START,
             NotebookAction.GET_NOTEBOOK_SUCCESS,
@@ -21,7 +21,7 @@ export const getNotebook=()=>{
 /**
  * 新增文集
  */
-export const postNotebook=(name: string)=>{
+export const postNotebook = (name: string) => {
     return {
         url: notebookUrl,
         option: {
@@ -45,7 +45,7 @@ export const postNotebook=(name: string)=>{
 /**
  * 删除文集
  */
-export const deleteNotebook=(id: string)=>{
+export const deleteNotebook = (id: string) => {
     return {
         url: `${notebookUrl}/${id}`,
         option: {
@@ -62,7 +62,7 @@ export const deleteNotebook=(id: string)=>{
 /**
  * 修改文集名称
  */
-export const putNotebook=(id: string,name: string)=>{
+export const putNotebook = (id: string, name: string) => {
     return {
         url: `${notebookUrl}/${id}`,
         option: {

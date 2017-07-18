@@ -30,26 +30,26 @@ class NotebookItem extends React.Component<NotebookItemProps, NotebookItemState>
         }));
     }
 
-    showForm=(isShow: boolean)=>{
+    showForm = (isShow: boolean) => {
         this.setState({
             isShowForm: isShow,
             isShowSelect: false
         });
     }
 
-    putNotebook=(name: string)=>{
-        this.props.putNotebook(this.props.notebook._id,name);
+    putNotebook = (name: string) => {
+        this.props.putNotebook(this.props.notebook._id, name);
         this.showForm(false);
     }
 
-    deleteNotebook=()=>{
+    deleteNotebook = () => {
         this.props.deleteNotebook(this.props.notebook._id);
         this.toggleSelect();
     }
 
     render() {
         const { notebook } = this.props;
-        const { isShowSelect,isShowForm } = this.state;
+        const { isShowSelect, isShowForm } = this.state;
         return (
             <li className="note-item">
                 <div className="item-content">
@@ -59,11 +59,11 @@ class NotebookItem extends React.Component<NotebookItemProps, NotebookItemState>
                     <div className="item-setting" onClick={this.toggleSelect}><i className="icon-cog"></i></div>
                     {isShowSelect &&
                         <ul className="item-select">
-                            <li onClick={()=>this.showForm(true)}><i className="icon icon-edit"></i>修改文集名</li>
+                            <li onClick={() => this.showForm(true)}><i className="icon icon-edit"></i>修改文集名</li>
                             <li onClick={this.deleteNotebook}><i className="icon icon-trash"></i>删除文集</li>
                         </ul>}
                 </div>
-                {isShowForm && <NotebookForm prevName={name} onSubmit={this.putNotebook} onCancel={()=>this.showForm(false)}/>}
+                {isShowForm && <NotebookForm prevName={name} onSubmit={this.putNotebook} onCancel={() => this.showForm(false)} />}
             </li>
         )
     }

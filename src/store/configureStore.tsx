@@ -4,10 +4,10 @@ import fetchMiddleware from '../middlewares/fetchMiddleware';
 import rootReducer from '../reducers';
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const configureStore=(initialState=undefined)=>{
-    const store=createStore(rootReducer,initialState,
+const configureStore = (initialState = undefined) => {
+    const store = createStore(rootReducer, initialState,
         composeEnhancers(
-            applyMiddleware(thunk,fetchMiddleware)
+            applyMiddleware(thunk, fetchMiddleware)
         )
     );
     return store;

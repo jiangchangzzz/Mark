@@ -12,11 +12,11 @@ import registerServiceWorker from './registerServiceWorker';
 import Routers from './routers';
 import configureStore from './store/configureStore';
 
-const store=configureStore();
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Routers/>
+    <Routers />
   </Provider>,
   document.getElementById('root') as HTMLElement
 );

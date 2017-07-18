@@ -4,34 +4,34 @@ import { NavLink } from 'react-router-dom';
 import './style.scss';
 import { Topic } from '../../../types';
 
-interface TopicItemProps{
+interface TopicItemProps {
     topic: Topic;
 }
 
-interface TopicItemState{
+interface TopicItemState {
     isShowTool: boolean;
 }
 
 class TopicItem extends React.Component<TopicItemProps, TopicItemState> {
-    constructor(props: TopicItemProps){
+    constructor(props: TopicItemProps) {
         super(props);
-        this.state={
+        this.state = {
             isShowTool: false
         };
     }
 
-    toggleTool=()=>{
-        this.setState(state=>({
+    toggleTool = () => {
+        this.setState(state => ({
             isShowTool: !state.isShowTool
         }));
     }
 
     render() {
-        const {topic}=this.props;
-        const {isShowTool}=this.state; 
+        const { topic } = this.props;
+        const { isShowTool } = this.state;
         return (
             <li className="topic-item">
-                <NavLink to={`/notebook/${topic.notebook}/topic/${topic._id}`} activeClassName="active" className="item-link"> 
+                <NavLink to={`/notebook/${topic.notebook}/topic/${topic._id}`} activeClassName="active" className="item-link">
                     <div className="item-icon"><i className="icon-book"></i></div>
                     <div className="item-text">
                         <h3>{topic.title}</h3>
