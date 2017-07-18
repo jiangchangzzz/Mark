@@ -1,17 +1,5 @@
 .topic-item{
     position: relative;
-    border-top: 1px solid #dcdcdc;
-    border-left: 5px solid transparent;
-    cursor: pointer;
-
-    &:hover{
-        background-color: #ececec;
-    }
-
-    &.active{
-        background-color: #ececec;
-        border-left-color: #2fa0ef;
-    }    
 
     .item-icon{
         float: left;
@@ -24,6 +12,7 @@
     }
 
     .item-setting{
+        display: none;
         position: absolute;
         right: 0;
         top: 50%;
@@ -31,6 +20,7 @@
         width: 30px;
         margin-top: -15px;
         text-align: center;
+        cursor: pointer;
 
         .setting-icon{
             line-height: 30px;
@@ -85,6 +75,12 @@
 
     .item-text{
         padding: 15px 30px 15px 60px;
+        border-top: 1px solid #dcdcdc;
+        border-left: 5px solid transparent;
+
+        &:hover{
+            background-color: #ececec;
+        }
 
         h3{
             font-size: 18px;
@@ -100,5 +96,16 @@
             text-overflow:ellipsis;
             white-space: nowrap;
         }
-    }   
+    } 
+
+    .active{
+        .item-text{
+            background-color: #ececec;
+            border-left-color: #2fa0ef;
+        }
+
+        & + .item-setting{
+            display: block;
+        }
+    }
 }

@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Link,withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
 import './style.scss';
 import { Topic } from '../../../types';
 
 interface TopicItemProps{
     topic: Topic;
-    match: any;
 }
 
 interface TopicItemState{
@@ -27,19 +27,17 @@ class TopicItem extends React.Component<TopicItemProps, TopicItemState> {
     }
 
     render() {
-        const {topic,match}=this.props;
+        const {topic}=this.props;
         const {isShowTool}=this.state; 
-        let topicId=match.params.topicid;
-
         return (
-            <li className={'topic-item ' + (topic._id===topicId?'active':'') }>
-                <Link to={`/notebook/${topic.notebook}/topic/${topic._id}`}>
+            <li className="topic-item">
+                <NavLink to={`/notebook/${topic.notebook}/topic/${topic._id}`} activeClassName="active" className="item-link"> 
                     <div className="item-icon"><i className="icon-book"></i></div>
                     <div className="item-text">
                         <h3>{topic.title}</h3>
                         <p>{topic.summary}</p>
                     </div>
-                </Link>
+                </NavLink>
                 <div className="item-setting">
                     <div className="setting-icon" onClick={this.toggleTool}>
                         <i className="icon-cog"></i>
@@ -54,4 +52,4 @@ class TopicItem extends React.Component<TopicItemProps, TopicItemState> {
     }
 }
 
-export default withRouter<any>(TopicItem);
+export default TopicItem;

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { withRouter,NavLink, RouteComponentProps } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './style.scss';
 import NotebookForm from '../../NotebookForm';
-import { Notebook, HomeRouterParam } from '../../../types'
+import { Notebook } from '../../../types'
 
 interface NotebookItemProps {
     notebook: Notebook;
@@ -15,7 +15,7 @@ interface NotebookItemState {
     isShowForm: boolean;
 }
 
-class NotebookItem extends React.Component<NotebookItemProps & RouteComponentProps<HomeRouterParam>, NotebookItemState>{
+class NotebookItem extends React.Component<NotebookItemProps, NotebookItemState>{
     constructor(props) {
         super(props);
         this.state = {
@@ -48,13 +48,14 @@ class NotebookItem extends React.Component<NotebookItemProps & RouteComponentPro
     }
 
     render() {
-        const { notebook,match } = this.props;
+        const { notebook } = this.props;
         const { isShowSelect,isShowForm } = this.state;
-        const currentid=match.params.notebookid;
         return (
-            <li className={'note-item ' + ( notebook._id===currentid? 'active' : '')}>
+            <li className="note-item">
                 <div className="item-content">
-                    <NavLink to={`/notebook/${notebook._id}`}><p className="item-name">{notebook.name}</p></NavLink>
+                    <NavLink to={`/notebook/${notebook._id}`} activeClassName="active">
+                        <p className="item-name">{notebook.name}</p>
+                    </NavLink>
                     <div className="item-setting" onClick={this.toggleSelect}><i className="icon-cog"></i></div>
                     {isShowSelect &&
                         <ul className="item-select">
@@ -68,4 +69,4 @@ class NotebookItem extends React.Component<NotebookItemProps & RouteComponentPro
     }
 }
 
-export default withRouter<NotebookItemProps>(NotebookItem);
+export default NotebookItem;

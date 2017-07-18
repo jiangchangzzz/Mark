@@ -61,12 +61,13 @@
         }
     }
     
-    &.active {
+    .active {
         .item-name {
             border-left-color: #2fa0ef;
             background-color: #646464;
         }
-        .item-setting {
+
+        & + .item-setting{
             display: block;
         }
     }

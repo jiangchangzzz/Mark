@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import './style.scss';
 import Editor from '../../../components/Editor';
-import { MarkStore, TopicStore, HomeRouterParam } from '../../../types';
+import { MarkStore, TopicStore, HomeParam } from '../../../types';
 import * as topicAction from '../../../actions/topic';
 
 interface MarkdownProps {
@@ -12,10 +12,11 @@ interface MarkdownProps {
     topicAction: any;
 }
 
-class Markdown extends React.Component<MarkdownProps & RouteComponentProps<HomeRouterParam>, any> {
+class Markdown extends React.Component<MarkdownProps & RouteComponentProps<HomeParam>, any> {
     renderEditor() {
         const { topic, match } = this.props;
         const { notebookid, topicid } = match.params;
+        console.log(notebookid,topicid)
         if (!topicid) {
             return <p className="markdown-info">请选择一篇文章</p>
         }
@@ -59,7 +60,7 @@ const mapDispatchToProps = (dispatch: Dispatch<MarkStore>) => {
     }
 }
 
-export default withRouter<any>(connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Markdown));
+)(Markdown);

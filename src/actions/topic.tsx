@@ -18,3 +18,12 @@ export const getTopics=(notebookId)=>{
     }
 }
 
+export const getTopicsIfNeeded=(notebookId)=>{
+    return (dispatch,getState)=>{
+        const topic=getState().topic[notebookId];
+        if(!topic){
+            dispatch(getTopics(notebookId));
+        }
+    }
+}
+

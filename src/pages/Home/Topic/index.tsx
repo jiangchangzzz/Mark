@@ -6,7 +6,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import './style.scss';
 import NewTopic from '../../../components/NewTopic';
 import TopicList from '../../../components/TopicList';
-import { TopicStore, HomeRouterParam, MarkStore } from '../../../types';
+import { TopicStore, HomeParam, MarkStore } from '../../../types';
 import * as topicAction from '../../../actions/topic';
 
 interface TopicProps{
@@ -14,25 +14,22 @@ interface TopicProps{
     topicAction: any;
 }
 
-class Topic extends React.Component<TopicProps & RouteComponentProps<HomeRouterParam> ,any> {
+class Topic extends React.Component<TopicProps & RouteComponentProps<HomeParam> ,any> {
     componentDidMount(){
         const {match}=this.props;
         let curId=match.params.notebookid;
 
         if(curId){
-            this.props.topicAction.getTopics(curId);
+            this.props.topicAction.getTopicsIfNeeded(curId);
         }
     }
 
-    componentDidUpdate(prevProps,preState){
-        const { topic }=this.props;
-
-        let preId=prevProps.match.params.notebookid;
+    componentWillReceiveProps(nextprops){
         let curId=this.props.match.params.notebookid;
+        let nextId=nextprops.match.params.notebookid;
 
-        if(curId && curId!==preId && !topic[curId]){
-            this.props.topicAction.getTopics(curId);
-            console.log('red');
+        if(nextId && nextId !== curId){
+            this.props.topicAction.getTopicsIfNeeded(nextId);
         }
     }
 

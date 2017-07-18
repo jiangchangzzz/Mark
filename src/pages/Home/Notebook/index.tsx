@@ -23,7 +23,7 @@ class Notebook extends React.Component<NotebookProps,any> {
     render() {
         const {notebook,notebookAction}=this.props;
 
-        let info;
+        let info='';
         if(notebook.isFetching){
             info='加载中...';
         }
@@ -35,8 +35,8 @@ class Notebook extends React.Component<NotebookProps,any> {
             <div className="notebook section">
                 <Back/>
                 <NewNotebook postNotebook={notebookAction.postNotebook}/>
-                <p className="notebook-info">{info}</p>
                 <NotebookList notebook={notebook} putNotebook={notebookAction.putNotebook} deleteNotebook={notebookAction.deleteNotebook}/>
+                <p className="notebook-info">{info}</p>
             </div>
         );
     }

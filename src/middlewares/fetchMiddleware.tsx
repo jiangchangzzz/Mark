@@ -13,6 +13,7 @@ const fetchMiddleware=store=>next=>action=>{
     const url=`${BASE_URL}${action.url}`;
 
     next({
+        ...action,
         type: LOADING
     });
 

@@ -19,9 +19,7 @@ class Routers extends React.Component<any,any> {
                 <Router>
                     <Switch>
                         <Route exact path="/" component={Home}/>
-                        <Route exact path="/notebook" component={Home}/>
-                        <Route exact path="/notebook/:notebookid" component={Home}/>
-                        <Route exact path="/notebook/:notebookid/topic/:topicid" component={Home}/>
+                        <Route path="/notebook" component={Home}/>
                         <Route path="/preview" component={Preview}/>
                         <Route path="/recycle" component={Recycle}/>
                         <Route path="/about" component={About}/>
