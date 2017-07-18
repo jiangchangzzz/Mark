@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import './style.scss';
 import Back from '../../../components/Back';
@@ -53,7 +54,7 @@ const mapDispatchToProps = (dispatch: Dispatch<MarkStore>) => {
     }
 }
 
-export default connect(
+export default withRouter<any>(connect(
     mapStateToProps,
     mapDispatchToProps
-)(Notebook);
+)(Notebook));
