@@ -15,7 +15,7 @@ class Routers extends React.Component<any, any> {
     render() {
         return (
             <App>
-                <Router>
+            <Router>
                     <Switch>
                         <Route exact path="/" component={Home} />
                         <Route path="/notebook" component={Home} />
@@ -23,7 +23,7 @@ class Routers extends React.Component<any, any> {
                         <Route path="/recycle" component={Recycle} />
                         <Route component={NotFound} />
                     </Switch>
-                </Router>
+            </Router>
             </App>
         );
     }

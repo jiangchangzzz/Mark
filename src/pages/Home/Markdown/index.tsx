@@ -11,32 +11,29 @@ import * as topicAction from '../../../actions/topic';
 interface MarkdownProps {
     topic: TopicStore;
     topicAction: any;
+    notebookId: string;
+    topicId: string;
 }
 
 class Markdown extends React.Component<MarkdownProps & RouteComponentProps<HomeParam>, any> {
     renderEditor() {
-        const { topic, match } = this.props;
-        const { notebookid, topicid } = match.params;
-        if (!topicid) {
-            return <p className="markdown-info">请选择一篇文章</p>
-        }
-        else {
-            const topics = topic[notebookid];
-            if (topics) {
-                let currentTopic;
-                topics.data.every(function (item) {
-                    if (item._id === topicid) {
-                        currentTopic = item;
-                        return false;
-                    }
-                    return true;
-                })
-                return <Editor topic={currentTopic} />
-            }
-            else {
-                return <p className="markdown-info">加载中...</p>;
+        const { topic, notebookId, topicId } = this.props;
+        const topics = topic[notebookId];
+        if (topics) {
+            let currentTopic;
+            topics.data.every(function (item) {
+                if (item._id === topicId) {
+                    currentTopic = item;
+                    return false;
+                }
+                return true;
+            });
+            if(currentTopic){
+                return <Editor topic={currentTopic} />;
             }
         }
+
+        return <p className="markdown-info">加载中...</p>;
     }
 
     render() {
@@ -60,7 +57,7 @@ const mapDispatchToProps = (dispatch: Dispatch<MarkStore>) => {
     }
 }
 
-export default connect(
+export default connect<any, any, any>(
     mapStateToProps,
     mapDispatchToProps
 )(Markdown);

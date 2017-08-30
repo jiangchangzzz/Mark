@@ -12,15 +12,6 @@ interface EditorState {
 }
 
 class Editor extends React.Component<EditorProps, EditorState> {
-    constructor(props: EditorProps) {
-        super(props);
-
-        this.state = {
-            title: props.topic.title,
-            content: props.topic.content
-        };
-    }
-
     changeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             title: e.target.value
@@ -34,17 +25,17 @@ class Editor extends React.Component<EditorProps, EditorState> {
     }
 
     render() {
-        const { title, content } = this.state;
+        const { topic } = this.props;
         return (
             <form className="editor">
                 <div className="editor-title">
-                    <input type="text" onChange={this.changeTitle} value={title} />
+                    <input type="text" onChange={this.changeTitle} value={topic.title} />
                 </div>
                 <div className="editor-tool">
 
                 </div>
                 <div className="editor-content">
-                    <textarea onChange={this.changeContent} value={content} />
+                    <textarea onChange={this.changeContent} value={topic.content} />
                 </div>
             </form>
         );

@@ -1,4 +1,6 @@
 import { TopicAction } from '../constants/actionType';
+import { USERID } from '../constants/config';
+import { parseQuery } from '../utils';
 
 const topicUrl = 'topic';
 
@@ -7,7 +9,10 @@ const topicUrl = 'topic';
  */
 export const getTopics = (notebookId) => {
     return {
-        url: `${topicUrl}?notebookid=${notebookId}`,
+        url: parseQuery(topicUrl,{
+            notebookid: notebookId,
+            userid: USERID
+        }),
         option: { method: 'GET' },
         types: [
             TopicAction.GET_TOPICS_START,

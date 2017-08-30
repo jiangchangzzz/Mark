@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Route, withRouter } from 'react-router-dom';
 
 import './style.scss';
+import Markdown from '../Markdown';
 import NewTopic from '../../../components/NewTopic';
 import TopicList from '../../../components/TopicList';
 import { TopicStore, HomeParam, MarkStore } from '../../../types';
@@ -53,10 +54,17 @@ class Topic extends React.Component<TopicProps & RouteComponentProps<HomeParam>,
     }
 
     render() {
+        const {match}=this.props;
+        const notebookId=match.params.notebookid;
         return (
-            <div className="topic section">
-                <NewTopic />
-                {this.renderTopicList()}
+            <div style={{height: '100%'}}>
+                <div className="topic section">
+                    <NewTopic />
+                    {this.renderTopicList()}
+                </div>
+                <Route path={`${match.url}/topic/:topicid`} render={({match})=>(
+                    <Markdown notebookId={notebookId} topicId={match.params.topicid}/>
+                )} />
             </div>
         );
     }
@@ -74,7 +82,7 @@ const mapDispatchToProps = (dispatch: Dispatch<MarkStore>) => {
     };
 };
 
-export default connect(
+export default withRouter<any>(connect(
     mapStateToProps,
     mapDispatchToProps
-)(Topic);
+)(Topic));

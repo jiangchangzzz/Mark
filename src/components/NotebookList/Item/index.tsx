@@ -8,6 +8,7 @@ interface NotebookItemProps {
     notebook: Notebook;
     putNotebook: any;
     deleteNotebook: any;
+    isEdit?: boolean;
 }
 
 interface NotebookItemState {
@@ -16,6 +17,10 @@ interface NotebookItemState {
 }
 
 class NotebookItem extends React.Component<NotebookItemProps, NotebookItemState>{
+    static defaultProps={
+        isEdit: true
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -48,7 +53,7 @@ class NotebookItem extends React.Component<NotebookItemProps, NotebookItemState>
     }
 
     render() {
-        const { notebook } = this.props;
+        const { notebook, isEdit } = this.props;
         const { isShowSelect, isShowForm } = this.state;
         return (
             <li className="note-item">
@@ -56,12 +61,16 @@ class NotebookItem extends React.Component<NotebookItemProps, NotebookItemState>
                     <NavLink to={`/notebook/${notebook._id}`} activeClassName="active">
                         <p className="item-name">{notebook.name}</p>
                     </NavLink>
-                    <div className="item-setting" onClick={this.toggleSelect}><i className="icon-cog"></i></div>
-                    {isShowSelect &&
-                        <ul className="item-select">
-                            <li onClick={() => this.showForm(true)}><i className="icon icon-edit"></i>修改文集名</li>
-                            <li onClick={this.deleteNotebook}><i className="icon icon-trash"></i>删除文集</li>
-                        </ul>}
+                    {isEdit &&
+                        <div className="item-setting">
+                            <i className="icon-cog" onClick={this.toggleSelect}></i>
+                            {isShowSelect &&
+                                <ul className="item-select">
+                                    <li onClick={() => this.showForm(true)}><i className="icon icon-edit"></i>修改文集名</li>
+                                    <li onClick={this.deleteNotebook}><i className="icon icon-trash"></i>删除文集</li>
+                                </ul>}
+                        </div>
+                    }
                 </div>
                 {isShowForm && <NotebookForm prevName={name} onSubmit={this.putNotebook} onCancel={() => this.showForm(false)} />}
             </li>
